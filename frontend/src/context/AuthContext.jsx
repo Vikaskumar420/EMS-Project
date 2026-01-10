@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios';
+import API from '../api/api';
 const UserContext = createContext();
 const AuthContext = ({ children }) => {
 
@@ -11,7 +12,7 @@ const AuthContext = ({ children }) => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await axios.get("http://localhost:3000/api/auth/verify",{
+          const response = await API.get("/api/auth/verify",{
             headers:{
               "authorization": `Bearer ${token}`
             }

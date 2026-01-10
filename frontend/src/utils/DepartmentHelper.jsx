@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
+import API from "../api/api";
 
 
 export const columns = [
@@ -30,8 +31,8 @@ export const DepartmentButton = ({ _id, onDepartmentDelete }) => {
         const isConfirm = window.confirm("Do you want to delete?")
         if (isConfirm) {
             try {
-                const response = await axios.delete(
-                    `http://localhost:3000/api/department/${id}`, {
+                const response = await API.delete(
+                    `/api/department/${id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }

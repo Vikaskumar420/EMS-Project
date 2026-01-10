@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchDepartments } from '../../utils/EmployeeHelper'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import API from '../../api/api'
 
 const Edit = () => {
     const [employee, setEmployee] = useState({
@@ -24,7 +25,7 @@ const Edit = () => {
             setEmpLoading(true)
 
             try {
-                const response = await axios.get(`http://localhost:3000/api/employee/${id}`, {
+                const response = await API.get(`/api/employee/${id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
@@ -74,8 +75,8 @@ const Edit = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(
-                `http://localhost:3000/api/employee/${id}`,
+            const response = await API.put(
+                `/api/employee/${id}`,
                 employee, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
