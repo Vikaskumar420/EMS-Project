@@ -19,7 +19,7 @@ app.use("/api/salary", salaryRouter)
 
 app.use(express.urlencoded({extended:true}));
 
-const port=process.env.PORT;
+const port=process.env.PORT || 3000;
 app.listen(port,()=>{
     console.log("server is running mode!");
     
