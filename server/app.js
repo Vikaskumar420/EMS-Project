@@ -1,10 +1,13 @@
 import express from'express'
+import dotenv from "dotenv";
 import cors from 'cors'
 import authRouter from './routes/auth.js'
 import departmentRouter from './routes/department.js'
 import employeeRouter from './routes/employee.js'
 import connectToDb from './db/db.js'
 import salaryRouter from './routes/salary.js'
+
+dotenv.config();
 
 connectToDb()
 const app= express();
