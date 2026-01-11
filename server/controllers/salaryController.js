@@ -1,7 +1,7 @@
 import Salary from "../models/salary.js";
 
 
-const addSalary = (req, res) => {
+const addSalary = async (req, res) => {
     try {
         const { employeeId, basicSalary, allowances, deductions, payDate } = req.body;
 
@@ -16,7 +16,7 @@ const addSalary = (req, res) => {
             payDate
         })
 
-        newSalary.save()
+       await newSalary.save()
 
         return res.status(200).json({ success: true })
 
