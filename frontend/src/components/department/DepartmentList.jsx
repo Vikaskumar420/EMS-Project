@@ -21,7 +21,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDeptLoading(true)
       try {
-        const response = await API.get("/api/department", {
+        const response = await axios.get("http://localhost:3000/api/department", {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }

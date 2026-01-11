@@ -13,7 +13,7 @@ const View = () => {
 
   const fetchSalaries = async ()=>{
     try {
-      const response = await API.get(`/api/salary/${id}`,{
+      const response = await axios.get(`http://localhost:3000/api/salary/${id}`,{
         headers:{
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

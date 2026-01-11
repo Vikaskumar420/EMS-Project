@@ -16,7 +16,7 @@ const View = () => {
           setEmpLoading(true)
             
             try {
-                const response = await API.get(`/api/employee/${id}`, {
+                const response = await axios.get(`http://localhost:3000/api/employee/${id}`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
                     }
@@ -48,7 +48,7 @@ const View = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <div >
           <img 
-          src={`${import.meta.env.VITE_API_URL}/${employee.userId.profileImage}`} 
+          src={`http://localhost:3000/${employee.userId.profileImage}`} 
           className='rounded-full border w-72 h-72 object-cover'
           />
         </div>
