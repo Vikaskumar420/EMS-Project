@@ -32,7 +32,7 @@ const List = () => {
               dept_name: emp.department.dept_name,
               name: emp.userId.name,
               dob: new Date(emp.dob).toLocaleDateString(),
-              profileImage: <img className='rounded-full w-15 h-15' src={`API/${emp.userId.profileImage}`} />,
+              profileImage: <img className='rounded-full w-15 h-15' src={`${import.meta.env.VITE_API_URL}/${emp.userId.profileImage}`} />,
               action: (<EmployeeButton Id={emp._id} />)
 
             }
