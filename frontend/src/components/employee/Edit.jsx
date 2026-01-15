@@ -127,7 +127,7 @@ const Edit = () => {
                                 name='maritalStatus'
                                 value={employee.maritalStatus}
                                 placeholder="MaritalStatus"
-                                className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                                 required
                             >
                                 <option value="">Select Status</option>
@@ -176,7 +176,7 @@ const Edit = () => {
                                 onChange={handleChange}
                                 name="department"
                                 value={employee.department}
-                                className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                                className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                                 required
                             >
                                 <option value="">Select Department</option>

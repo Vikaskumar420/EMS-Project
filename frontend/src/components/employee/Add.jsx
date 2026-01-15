@@ -129,7 +129,7 @@ const Add = () => {
                         <select
                             onChange={handleChange}
                             name='gender'
-                            className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                            className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                             required
                         >
                             <option value="">Select Gender</option>
@@ -148,7 +148,7 @@ const Add = () => {
                             onChange={handleChange}
                             name='maritalStatus'
                             placeholder="MaritalStatus"
-                            className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                            className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                             required
                         >
                             <option value="">Select Status</option>
@@ -180,7 +180,7 @@ const Add = () => {
                         <select
                         onChange={handleChange}
                             name="department"
-                            className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                            className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                             required
                         >
                             <option value="">Select Department</option>
@@ -229,7 +229,7 @@ const Add = () => {
                         <select
                             onChange={handleChange}
                             name="role"
-                            className='mt-1 p-2 block w-full border-gray-300 rounded-md'
+                            className='mt-1 p-2 block w-full border border-gray-300 rounded-md'
                             required
                         >
                             <option value="">Select Role</option>
