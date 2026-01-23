@@ -20,8 +20,7 @@ const View = () => {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }
-        })
-        console.log(response.data);
+        });
         
         if (response.data.success) {
 

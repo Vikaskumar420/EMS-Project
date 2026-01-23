@@ -77,7 +77,6 @@ const getEmployees = async (req, res) => {
 
 const getEmployee = async (req, res) => {
     const { id } = req.params;
-    console.log("PARAM ID:", id);
 
     try {
 
