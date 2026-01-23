@@ -16,7 +16,7 @@ const AdminSummary = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
 
       if (response.data.success) {
         setDashboard(response.data.data)
