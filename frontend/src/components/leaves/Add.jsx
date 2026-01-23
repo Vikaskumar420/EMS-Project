@@ -25,7 +25,7 @@ const handleSubmit= async (e)=>{
       });
       console.log(response.data);
       if(response.data.success){
-        navgate('/employee-dashboard/leaves')
+        navgate(`/employee-dashboard/leaves/${user._id}`)
       }
       
     } catch (error) {

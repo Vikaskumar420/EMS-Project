@@ -63,13 +63,13 @@ const View = () => {
           <table className='w-full text-sm text-left text-gray-500'>
             <thead className='text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200 '>
               <tr>
-                <th className='px-6 py-3'>SNO</th>
-                <th className='px-6 py-3'>Emp Id</th>
-                <th className='px-6 py-3'>Salary</th>
-                <th className='px-6 py-3'>Allowances</th>
-                <th className='px-6 py-3'>Deductions</th>
-                <th className='px-6 py-3'>Total</th>
-                <th className='px-6 py-3'>Pay Date</th>
+                <th className='px-6 py-3 text-center'>SNO</th>
+                <th className='px-6 py-3 text-center'>Emp Id</th>
+                <th className='px-6 py-3 text-center'>Salary</th>
+                <th className='px-6 py-3 text-center'>Allowances</th>
+                <th className='px-6 py-3 text-center'>Deductions</th>
+                <th className='px-6 py-3 text-center'>Total</th>
+                <th className='px-6 py-3 text-center'>Pay Date</th>
               </tr>
             </thead>
             <tbody>
@@ -78,13 +78,13 @@ const View = () => {
                   key= {salary._id}
                   className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'
                 >
-                  <td>{sno++}</td>
-                  <td>{salary.employeeId.employeeId}</td>
-                  <td>{salary.basicSalary}</td>
-                  <td>{salary.allowances}</td>
-                  <td>{salary.deductions}</td>
-                  <td>{salary.netSalary}</td>
-                  <td>{new Date(salary.payDate).toLocaleDateString()}</td>
+                  <td className='text-center' >{sno++}</td>
+                  <td className='text-center'>{salary.employeeId.employeeId}</td>
+                  <td className='text-center'>{salary.basicSalary}</td>
+                  <td className='text-center'>{salary.allowances}</td>
+                  <td className='text-center'>{salary.deductions}</td>
+                  <td className='text-center'>{salary.netSalary}</td>
+                  <td className='text-center'>{new Date(salary.payDate).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
