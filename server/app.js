@@ -7,6 +7,7 @@ import employeeRouter from './routes/employee.js';
 import salaryRouter from './routes/salary.js';
 import connectToDb from './db/db.js';
 import leaveRouter from './routes/leave.js'
+import dasboardRouter from './routes/dashboard.js'
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/department", departmentRouter);
 app.use("/api/employee", employeeRouter);
 app.use("/api/salary", salaryRouter);
 app.use("/api/leave", leaveRouter);
+app.use("/api/adminDashboard", dasboardRouter);
 
 // Health check route
 app.get('/api/health', (req, res) => {

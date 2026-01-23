@@ -85,7 +85,7 @@ const View = () => {
             </div>
           </div>
         </div>
-      ) : <div>Employee not found!</div>}</>
+      ) : <div className=' flex justify-center  mt-52'>Employee not found!</div>}</>
   )
 }
 
