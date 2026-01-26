@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 const Sidebar = () => {
 
     const { user } = useAuth()
+    
 
     return (
         <div className='bg-gray-800 text-white h-screen fixed left-0 top-0 bottom-0 space-y-2 w-64'>
@@ -43,7 +44,7 @@ const Sidebar = () => {
                     <span>Leaves</span>
                 </NavLink>
                 <NavLink
-                    to="/employee-dashboard/salary"
+                    to={`/employee-dashboard/salary/${user._id}`}
                     className={({ isActive }) =>
                         `${isActive ? "bg-teal-500" : " "
                         } flex items-center space-x-4 px-4 py-2.5 rounded `}

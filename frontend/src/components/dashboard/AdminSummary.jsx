@@ -4,8 +4,10 @@ import { FaBuilding, FaCheckCircle, FaFileAlt, FaHourglassHalf, FaMoneyBillWave,
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const AdminSummary = () => {
+  const navigate = useNavigate();
 
   const [dashboard, setDashboard] = useState(null);
 
@@ -40,22 +42,29 @@ const AdminSummary = () => {
     <div className='p-6'>
       <h3 className='text-2xl font-bold'>Dashboard Overview</h3>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-6'>
+      <div 
+      className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 cursor-pointer'>
+        <div onClick={()=>navigate('/admin-dashboard/employees')}>
         <SummaryCard icon={<FaUsers />}
           text="Total Employees"
           number={dashboard.totalEmployees}
           color="bg-teal-600"
         />
+        </div>
+        <div onClick={()=>navigate('/admin-dashboard/departments')}>
         <SummaryCard icon={<FaBuilding />}
           text="Total Department"
           number={dashboard.totalDepartments}
           color="bg-yellow-600"
         />
+        </div>
+        <div>
         <SummaryCard icon={<FaMoneyBillWave />}
           text="Total Salary"
           number={`₹ ${dashboard.totalSalary}`}
           color="bg-red-600"
         />
+        </div>
       </div>
 
       <div className='mt-12'>
