@@ -41,7 +41,7 @@ const Add = () => {
     }
 
 
-    // Handle submit
+    //Handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
 
