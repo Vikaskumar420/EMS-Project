@@ -13,19 +13,19 @@ const Navbar = () => {
     ? `http://localhost:3000/${user.profileImage}`
     : "/default-avatar.png"
 
-  // 🔹 Open device file picker
+  // Open device file picker
   const handleChangeImageClick = () => {
     fileInputRef.current.click()
     setOpen(false)
   }
 
-  // 🔹 When user selects image
+  // When user selects image
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
 
     console.log("Selected file:", file)
-    // 👉 yahin se upload API call karoge (next step)
+    // yahin se upload API call karoge (next step)
   }
 
   return (
