@@ -23,7 +23,6 @@ const handleSubmit= async (e)=>{
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(response.data);
       if(response.data.success){
         navgate(`/employee-dashboard/leaves/${user._id}`)
       }

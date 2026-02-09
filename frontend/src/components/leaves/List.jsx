@@ -1,107 +1,89 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext'
+import DataTable from 'react-data-table-component'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { columns, LeaveButton } from '../../utils/LeaveHelper'
+
 const List = () => {
 
-  const [leaves, setLeaves] = useState([])
-  const { id } = useParams();
-  const { user } = useAuth();
-  // let sno = 1;
+  const[leaves, setLeaves] = useState([])
 
-  const fetchLeaves = async () => {
+  const fetchLeaves = async ()=>{
     try {
-      const response = await axios.get(`http://localhost:3000/api/leave/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+        const response = await axios.get(
+          "http://localhost:3000/api/leave",
+           {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        
+        if (response.data.success) {
+          let sno = 1;
+          const data = response.data.leaves.map((leave) => (
+            {
+              _id: leave._id,
+              sno: sno++,
+              employeeId:leave.employeeId?.employeeId,
+              dept_name: leave.department?.dept_name,
+              name: leave.userId?.name,
+              leaveType:leave.leaveType,
+              days:
+                new Date(leave.endDate).getDate()-
+                new Date(leave.startDate).getDate(),
+                status:leave.status,
+              action: (<LeaveButton Id={leave._id} />)
 
-      console.log(response);
-      if (response.data.success) {
-        setLeaves(response.data.leave);
-        // setFilteredSalaries(response.data.salary);
+            }
+          ))
+          setLeaves(data)
+
+        }
       }
+      catch (error) {
+        if (error.response && !error.response.data.success) {
+          alert(error.response.data.error)
+        }
+      } 
+  }
 
-    } catch (error) {
-      if (error.response && !error.response.data.success) {
-        alert(error.message);
-      }
-    }
-  };
+useEffect(()=>{
 
-  useEffect(() => {
-    fetchLeaves();
-  }, []);
+   fetchLeaves()
 
+},[]);
 
   return (
-    <div>
-      <div className='p-6'>
-        <div className='text-center'>
-          <h3 className='text-2xl font-bold'
-          >
-            Manage Leaves
-          </h3>
+    <>
+    {leaves.length>= 0 ?(
+    <div className='py-6 px-10'>
+      <div className='text-center'>
+        <h3 className='text-2xl font-bold'
+        >
+          Manage Leaves
+        </h3>
+      </div>
+      <div className='flex justify-between items-center mb-3 '>
+        <input
+          type="text"
+          placeholder='Search By emp name'
+          className='px-4 py-0.5 bg-white rounded-lg border'
+
+        />
+
+        <div className='space-x-3 '>
+          <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Pending</button>
+        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Approved</button>
+        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Rejected</button>
         </div>
-        <div className='flex justify-between items-center '>
-          <input
-            type="text"
-            placeholder='Search By emp name'
-            className='px-4 py-0.5 bg-white rounded-lg border' />
+      </div>
 
-          <Link to="/employee-dashboard/add-leave"
-            className='px-4 py-1 bg-teal-600 rounded-lg text-white hover:bg-teal-700'
-          >
-            Add New Leave
-          </Link>
-        </div>
-
-        {/* List of Leaves */}
-        <table className='w-full text-sm text-left text-gray-500'>
-          <thead className='text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200 '>
-            <tr>
-              <th className='px-6 py-3'>SNO</th>
-              <th className='px-6 py-3'>LeaveType</th>
-              <th className='px-6 py-3'>startDate</th>
-              <th className='px-6 py-3'>endDate</th>
-              <th className='px-6 py-3'>reason</th>
-              <th className='px-6 py-3'>status</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            {leaves.length > 0 ? (
-              leaves.map((leave, index) => (
-                <tr
-                  key={leave._id}
-                  className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'
-                >
-                  <td className='px-6 py-3'>{index + 1}</td>
-                  <td className='px-6 py-3'>{leave.leaveType}</td>
-                  <td className='px-6 py-3'>
-                    {new Date(leave.startDate).toLocaleDateString()}
-                  </td>
-                  <td className='px-6 py-3'>
-                    {new Date(leave.endDate).toLocaleDateString()}
-                  </td>
-                  <td className='px-6 py-3'>{leave.reason}</td>
-                  <td className='px-6 py-3'>{leave.status}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="text-center py-4">
-                  No leaves found
-                </td>
-              </tr>
-            )}
-          </tbody>
-
-        </table>
-
+      <div className='mt-3'>
+        <DataTable columns={columns} data={leaves} pagination />
       </div>
     </div>
+    ):<div>Lodding...</div>}
+    </>
   )
 }
 

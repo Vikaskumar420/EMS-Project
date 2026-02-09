@@ -6,7 +6,6 @@ import API from '../../api/api';
 const View = () => {
 
   const [salaries, setSalaries] =useState([]);
-  const [filteredSalaries, setFilteredSalaries] =useState([]);
   const {id} = useParams();
   let sno = 1;
 
@@ -21,7 +20,6 @@ const View = () => {
       
       if(response.data.success){
         setSalaries(response.data.salary); 
-        setFilteredSalaries(response.data.salary);
       }
       
     } catch (error) {
@@ -35,31 +33,19 @@ const View = () => {
     fetchSalaries();
   },[]);
 
-  const filterSalaries = (q)=>{
-    const filteredRecords = salaries.filter((salary)=>
-      salary.employeeId.toLowerCase().includes(q.toLowerCase())
-    );
-    setFilteredSalaries(filteredRecords)
-  }
+  
 
   return (
     <>
-    {filterSalaries === 0 ? (<div>Loading...</div>) : (
+    {salaries === 0 ? (<div>Loading...</div>) : (
       <div className='overflow-x-auto p-5'>
-        <div className='text-center'>
+        <div className='text-center mb-8'>
           <h2 className='text-2xl font-bold'>Salary History</h2>
         </div>
 
-        <div className='flex justify-end my-3'>
-          <input 
-          type="text" 
-          placeholder='Search By Emp ID'
-          className='border px-2 py-0.5 rounded-md border-gray-300'
-          onChange={filterSalaries}
-          />
-        </div>
+        
 
-        {filteredSalaries.length > 0 ? (
+        {salaries.length > 0 ? (
           <table className='w-full text-sm text-left text-gray-500'>
             <thead className='text-xs text-gray-700 uppercase bg-gray-50 border border-gray-200 '>
               <tr>
@@ -73,7 +59,7 @@ const View = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredSalaries.map((salary)=>(
+              {salaries.map((salary)=>(
                 <tr 
                   key= {salary._id}
                   className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 
+
+
 export const columns = [
   {
     name: "S No",
@@ -98,7 +100,6 @@ export const EmployeeButton = ({ Id }) => {
   const navigate = useNavigate();
 
 
-
   return (
     <div className="flex space-x-3">
       <button
@@ -121,7 +122,7 @@ export const EmployeeButton = ({ Id }) => {
       </button>
       <button
         className="px-5 w-18 py-1 bg-red-600 text-white rounded-full hover:bg-red-800"
-
+        onClick={()=> navigate(`/admin-dashboard/employee/salary/${Id}`)}
       >
         Leave
       </button>
