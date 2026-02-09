@@ -143,7 +143,6 @@ const updateLeave = async (req, res)=>{
       error:'Leave not found '
      });
    }
-   console.log(leave.status);
    
    return res.status(200).json({
     success: true
