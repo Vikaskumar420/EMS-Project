@@ -7,6 +7,7 @@ import { columns, LeaveButton } from '../../utils/LeaveHelper'
 const List = () => {
 
   const[leaves, setLeaves] = useState([])
+  const[filteredLeaves, setFilteredLeaves] = useState([])
 
   const fetchLeaves = async ()=>{
     try {
@@ -36,7 +37,8 @@ const List = () => {
 
             }
           ))
-          setLeaves(data)
+          setLeaves(data);
+          setFilteredLeaves(data)
 
         }
       }
@@ -53,9 +55,27 @@ useEffect(()=>{
 
 },[]);
 
+const filterByInput = (e)=>{
+   const data = leaves.filter((leave)=>
+    leave.employeeId
+   .toLowerCase()
+   .includes(e.target.value.toLowerCase())
+  );
+  setFilteredLeaves(data);
+};
+
+const filterByButton = (status)=>{
+  const data = leaves.filter((leave)=>
+    leave.status
+   .toLowerCase()
+   .includes(status.toLowerCase())
+  );
+  setFilteredLeaves(data);
+}
+
   return (
     <>
-    {leaves.length>= 0 ?(
+    {filteredLeaves ?(
     <div className='py-6 px-10'>
       <div className='text-center'>
         <h3 className='text-2xl font-bold'
@@ -66,20 +86,27 @@ useEffect(()=>{
       <div className='flex justify-between items-center mb-3 '>
         <input
           type="text"
-          placeholder='Search By emp name'
+          placeholder='Search By emp Id'
           className='px-4 py-0.5 bg-white rounded-lg border'
+          onChange={filterByInput}
 
         />
 
         <div className='space-x-3 '>
-          <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Pending</button>
-        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Approved</button>
-        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'>Rejected</button>
+          <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'
+          onClick={()=>filterByButton("Pending")}
+          >Pending</button>
+        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'
+        onClick={()=>filterByButton("Approved")}
+        >Approved</button>
+        <button className='px-2 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded-md'
+        onClick={()=>filterByButton("Rejected")}
+        >Rejected</button>
         </div>
       </div>
 
       <div className='mt-3'>
-        <DataTable columns={columns} data={leaves} pagination />
+        <DataTable columns={columns} data={filteredLeaves} pagination />
       </div>
     </div>
     ):<div>Lodding...</div>}

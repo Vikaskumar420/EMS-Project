@@ -2,12 +2,17 @@ import React, { useRef, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { FaUser, FaCamera } from "react-icons/fa"
 
+
 const Navbar = () => {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
   const fileInputRef = useRef(null)
+  
 
-  if (!user) return null
+  if (!user) return null;
+
+  
+  
 
   const imageUrl = user.profileImage
     ? `http://localhost:3000/${user.profileImage}`
@@ -57,7 +62,7 @@ const Navbar = () => {
               className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-100"
               onClick={() => setOpen(false)}
             >
-              <FaUser /> Profile
+              <FaUser /> <p>Profile</p>
             </button>
 
             <button
