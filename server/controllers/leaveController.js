@@ -50,7 +50,11 @@ const addLeave = async (req, res) => {
 const getLeave = async (req, res) => {
     try {
         const { id } = req.params;
-        const leave = await Leave.find({ userId: id })
+        
+        let leave = await Leave.find({ userId: id })
+        if (leave.length === 0) {
+      leave = await Leave.find({ employeeId: id });
+    }
         res.status(200).json({ success: true, leave })
 
 

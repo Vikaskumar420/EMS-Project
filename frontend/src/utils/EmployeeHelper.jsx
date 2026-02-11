@@ -122,7 +122,7 @@ export const EmployeeButton = ({ Id }) => {
       </button>
       <button
         className="px-5 w-18 py-1 bg-red-600 text-white rounded-full hover:bg-red-800"
-        onClick={()=> navigate(`/admin-dashboard/employee/salary/${Id}`)}
+        onClick={()=> navigate(`/admin-dashboard/employees/leaves/${Id}`)}
       >
         Leave
       </button>

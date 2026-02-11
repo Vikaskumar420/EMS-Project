@@ -39,7 +39,10 @@ const Setting = () => {
         }
       );
                 if (response.data.success) {
-                    navigate(`/employee-dashboard/profile/${user._id}`);
+                    {user.role === "employee" ?
+                    navigate(`/employee-dashboard/profile/${user._id}`)
+                    :navigate(`/admin-dashboard`)
+                    }
                     setError('')
                 }
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import {useAuth} from '../../context/AuthContext'
 import axios from 'axios'
 const MyLeaves = () => {
 
-  const [leaves, setLeaves] = useState([])
-  const { id } = useParams();
+  const [leaves, setLeaves] = useState([]);
+  const {id} = useParams();
   
-  // let sno = 1;
 
   const fetchLeaves = async () => {
     try {
@@ -17,9 +17,9 @@ const MyLeaves = () => {
       });
 
       
+      
       if (response.data.success) {
         setLeaves(response.data.leave);
-        // setFilteredSalaries(response.data.salary);
       }
 
     } catch (error) {
@@ -30,31 +30,40 @@ const MyLeaves = () => {
   };
 
   useEffect(() => {
-    fetchLeaves();
+    
+      fetchLeaves();
+    
   }, []);
 
+  const {user} = useAuth();
 
   return (
     <div>
       <div className='p-6'>
         <div className='text-center'>
-          <h3 className='text-2xl font-bold'
+          <h3 className='text-2xl font-bold mb-5'
           >
             Manage Leaves
           </h3>
         </div>
-        <div className='flex justify-between items-center '>
-          <input
-            type="text"
-            placeholder='Search By emp name'
-            className='px-4 py-0.5 bg-white rounded-lg border' />
 
-          <Link to="/employee-dashboard/add-leave"
-            className='px-4 py-1 bg-teal-600 rounded-lg text-white hover:bg-teal-700'
-          >
-            Add New Leave
-          </Link>
-        </div>
+        {user?.role === "employee" && (
+  <div className='flex justify-between items-center mb-5 '>
+    <input
+      type="text"
+      placeholder='Search By emp name'
+      className='px-4 py-0.5 bg-white rounded-lg border'
+    />
+
+    <Link
+      to="/employee-dashboard/add-leave"
+      className='px-4 py-1 bg-teal-600 rounded-lg text-white hover:bg-teal-700'
+    >
+      Add New Leave
+    </Link>
+  </div>
+)}
+
 
         {/* List of Leaves */}
         <table className='w-full text-sm text-left text-gray-500'>
