@@ -71,7 +71,7 @@ const getEmployees = async (req, res) => {
         const employees = await Employee.find().populate('userId', { password: 0 }).populate('department')
         return res.status(200).json({ success: true, employees })
     } catch (error) {
-        res.status(500).json({ success: false, error: "get employees server error" })
+       return res.status(500).json({ success: false, error: "get employees server error" })
     }
 }
 

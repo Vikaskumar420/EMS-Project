@@ -5,7 +5,7 @@ const verifyUser = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
-    // 1️⃣ Check header exists
+    //  Check header exists
     if (!authHeader) {
       return res.status(401).json({
         success: false,
@@ -13,7 +13,7 @@ const verifyUser = async (req, res, next) => {
       });
     }
 
-    // 2️⃣ Extract token
+    //  Extract token
     const token = authHeader.split(" ")[1];
 
     if (!token) {
@@ -23,10 +23,10 @@ const verifyUser = async (req, res, next) => {
       });
     }
 
-    // 3️⃣ Verify token
+    //  Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-    // 4️⃣ Find user
+    //  Find user
     const user = await User.findById(decoded._id).select("-password");
 
     if (!user) {
@@ -36,11 +36,10 @@ const verifyUser = async (req, res, next) => {
       });
     }
 
-    // 5️⃣ Attach user
+    //  Attach user
     req.user = user;
     next();
   } catch (error) {
-    console.error("Auth Middleware Error:", error.message);
     return res.status(401).json({
       success: false,
       error: "Invalid or expired token",

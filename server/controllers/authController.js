@@ -22,12 +22,12 @@ const login = async (req, res) => {
             { _id: user._id, role: user.role },
             process.env.JWT_SECRET_KEY,
             { expiresIn: "10d" });
-        res
+        return res
             .status(200)
             .json({ success: true, token, user: { _id: user._id, name: user.name, role: user.role } })
 
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message })
+        return res.status(500).json({ success: false, error: error.message })
 
     }
 }

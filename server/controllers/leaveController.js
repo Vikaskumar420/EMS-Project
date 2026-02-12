@@ -48,19 +48,19 @@ const addLeave = async (req, res) => {
 
 
 const getLeave = async (req, res) => {
-    try {
-        const { id } = req.params;
-        
-        let leave = await Leave.find({ userId: id })
-        if (leave.length === 0) {
+  try {
+    const { id } = req.params;
+
+    let leave = await Leave.find({ userId: id })
+    if (leave.length === 0) {
       leave = await Leave.find({ employeeId: id });
     }
-        res.status(200).json({ success: true, leave })
+    return res.status(200).json({ success: true, leave })
 
 
-    } catch (error) {
-        res.status(500).json({ success: false, error: "get leave server erorr" })
-    }
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "get leave server erorr" })
+  }
 
 };
 
@@ -80,14 +80,14 @@ const getLeaves = async (req, res) => {
         select: 'name'
       })
 
+
     return res.status(200).json({
       success: true,
       leaves
     })
 
   } catch (error) {
-    console.error(error)
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       error: error.message
     })
@@ -136,30 +136,30 @@ const getLeavesDetail = async (req, res) => {
 };
 
 
-const updateLeave = async (req, res)=>{
-   try {
-    const {id} = req.params;
-   
-   const leave = await Leave.findByIdAndUpdate({_id:id}, {status:req.body.status});
-   if(!leave){
-     return res.status(404).json({
-      success: false,
-      error:'Leave not found '
-     });
-   }
-   
-   return res.status(200).json({
-    success: true
-   });
-   
-   } catch (error) {
+const updateLeave = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const leave = await Leave.findByIdAndUpdate({ _id: id }, { status: req.body.status });
+    if (!leave) {
+      return res.status(404).json({
+        success: false,
+        error: 'Leave not found '
+      });
+    }
+
+    return res.status(200).json({
+      success: true
+    });
+
+  } catch (error) {
     console.log(error.message);
-    
+
     return res.status(500).json({
       success: false,
-      error:'updateLeave error'
+      error: 'updateLeave error'
     });
-   }
+  }
 }
 
 

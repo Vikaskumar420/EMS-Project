@@ -5,7 +5,7 @@ const changePassword = async (req, res) => {
    try {
       const { userId, oldPassword, newPassword } = req.body;
 
-      const user = await User.findById({_id: userId});
+      const user = await User.findById({ _id: userId });
 
       if (!user) {
          return res.status(404).json({
@@ -24,7 +24,7 @@ const changePassword = async (req, res) => {
 
       const hashPassword = await bcrypt.hash(newPassword, 10);
 
-      await User.findByIdAndUpdate({_id: userId}, {
+      await User.findByIdAndUpdate({ _id: userId }, {
          password: hashPassword,
       });
 

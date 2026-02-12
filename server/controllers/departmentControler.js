@@ -12,11 +12,11 @@ const addDepartment = async (req, res) => {
             description
         });
         await newDept.save();
-        res.status(200).json({ success: true, department: newDept });
+        return res.status(200).json({ success: true, department: newDept });
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({ success: false, error: "add department server error" })
+        return res.status(500).json({ success: false, error: "add department server error" })
     }
 }
 
@@ -25,7 +25,7 @@ const getDepartments = async (req, res) => {
         const departments = await Department.find()
         return res.status(200).json({ success: true, departments })
     } catch (error) {
-        res.status(500).json({ success: false, error: "get department server error" })
+        return res.status(500).json({ success: false, error: "get department server error" })
     }
 }
 
@@ -34,11 +34,11 @@ const getDepartment = async (req, res) => {
         const { id } = req.params
         const department = await Department.findById({ _id: id })
 
-        res.status(200).json({ success: true, department })
+        return res.status(200).json({ success: true, department })
 
 
     } catch (error) {
-        res.status(500).json({ success: false, error: "get department server error" })
+        return res.status(500).json({ success: false, error: "get department server error" })
 
     }
 }
@@ -51,10 +51,10 @@ const updatDepartment = async (req, res) => {
             dept_name,
             description
         })
-        res.status(200).json({ success: true, updatDept })
+        return res.status(200).json({ success: true, updatDept })
 
     } catch (error) {
-        res.status(500).json({ success: false, error: "get department server error" })
+        return res.status(500).json({ success: false, error: "get department server error" })
 
     }
 }
@@ -70,11 +70,11 @@ const deleteDepartment = async (req, res) => {
             });
         }
         await deleteDept.deleteOne();
-        res.status(200).json({ success: true, deleteDept })
+        return res.status(200).json({ success: true, deleteDept })
 
     } catch (error) {
         console.log("DELETE DEPARTMENT ERROR:", error);
-        res.status(500).json({ success: false, error: "delete department server error" })
+        return res.status(500).json({ success: false, error: "delete department server error" })
     }
 }
 
