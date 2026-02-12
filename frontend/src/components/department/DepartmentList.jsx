@@ -11,14 +11,11 @@ const DepartmentList = () => {
   const [deptLoading, setDeptLoading] = useState(false)
   const [filteredDepartments, setFilteredDepartments] = useState([])
 
-  const onDepartmentDelete = async (id) => {
-    const data = departments.filter(dept => dept._id !== id)
-    setDepartments(data)
-  }
+  const onDepartmentDelete =  () => {
+    fetchDepartments()
+  };
 
-  useEffect(() => {
-
-    const fetchDepartments = async () => {
+  const fetchDepartments = async () => {
       setDeptLoading(true)
       try {
         const response = await axios.get("http://localhost:3000/api/department", {
@@ -50,6 +47,10 @@ const DepartmentList = () => {
         setDeptLoading(false)
       }
     };
+
+  useEffect(() => {
+
+    
     fetchDepartments();
   }, [])
 

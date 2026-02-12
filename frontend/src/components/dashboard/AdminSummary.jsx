@@ -43,15 +43,19 @@ const AdminSummary = () => {
       <h3 className='text-2xl font-bold'>Dashboard Overview</h3>
 
       <div 
-      className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 cursor-pointer'>
-        <div onClick={()=>navigate('/admin-dashboard/employees')}>
+      className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 '>
+        <div 
+        className='cursor-pointer'
+        onClick={()=>navigate('/admin-dashboard/employees')}>
         <SummaryCard icon={<FaUsers />}
           text="Total Employees"
           number={dashboard.totalEmployees}
           color="bg-teal-600"
         />
         </div>
-        <div onClick={()=>navigate('/admin-dashboard/departments')}>
+        <div
+        className='cursor-pointer'
+         onClick={()=>navigate('/admin-dashboard/departments')}>
         <SummaryCard icon={<FaBuilding />}
           text="Total Department"
           number={dashboard.totalDepartments}
@@ -70,11 +74,15 @@ const AdminSummary = () => {
       <div className='mt-12'>
         <h4 className='text-2xl text-center font-bold'>Leave Details</h4>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-6'>
-          <SummaryCard icon={<FaFileAlt />}
+          <div 
+          className='cursor-pointer'
+          onClick={()=> navigate('/admin-dashboard/leaves')}>
+            <SummaryCard icon={<FaFileAlt />}
             text="Leave Applied"
             number={dashboard.leaveApplied}
             color="bg-teal-600"
           />
+          </div>
           <SummaryCard icon={<FaCheckCircle />}
             text="Leave Approved"
             number={dashboard.leaveApproved}

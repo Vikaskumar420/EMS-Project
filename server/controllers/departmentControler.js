@@ -62,10 +62,18 @@ const updatDepartment = async (req, res) => {
 const deleteDepartment = async (req, res) => {
     const { id } = req.params;
     try {
-        const deleteDept = await Department.findByIdAndDelete({ _id: id })
+        const deleteDept = await Department.findById({ _id: id });
+        if (!deleteDept) {
+            return res.status(404).json({
+                success: false,
+                message: "Department not found"
+            });
+        }
+        await deleteDept.deleteOne();
         res.status(200).json({ success: true, deleteDept })
 
     } catch (error) {
+        console.log("DELETE DEPARTMENT ERROR:", error);
         res.status(500).json({ success: false, error: "delete department server error" })
     }
 }

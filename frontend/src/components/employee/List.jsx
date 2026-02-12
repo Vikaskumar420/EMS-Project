@@ -22,18 +22,21 @@ const List = () => {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('token')}`
           }
-        })
+        });
+        // console.log(response.data);
+        // console.log(response.data.employees);
+
         if (response.data.success) {
           let sno = 1;
-          const data = await response.data.employees.map((emp) => (
+          const data =  response.data.employees.map((emp) => (
             {
-              _id: emp._id,
+              _id: emp?._id ||"N/A",
               sno: sno++,
-              dept_name: emp.department.dept_name,
-              name: emp.userId.name,
-              dob: new Date(emp.dob).toLocaleDateString(),
-              profileImage: <img className='rounded-full w-15 h-15' src={`http://localhost:3000/${emp.userId.profileImage}`} />,
-              action: (<EmployeeButton Id={emp._id} />)
+              dept_name: emp?.department?.dept_name ||"N/A",
+              name: emp?.userId?.name ||"N/A",
+              dob: new Date(emp?.dob ||"N/A").toLocaleDateString(),
+              profileImage: <img className='rounded-full w-15 h-15' src={`http://localhost:3000/${emp?.userId?.profileImage ||"N/A"}`} />,
+              action: (<EmployeeButton Id={emp?._id ||"N/A"} />)
 
             }
           ))
@@ -53,12 +56,15 @@ const List = () => {
     fetchEmployees();
   }, [])
 
-  const handleFilter = (e)=>{
-    const records = employees.filter((emp)=>(
+  const handleFilter = (e) => {
+    const records = employees.filter((emp) => (
       emp.name.toLowerCase().includes(e.target.value.toLowerCase())
     ));
     setFilteredEmployees(records);
   }
+
+ 
+
 
   return (
     <div className='p-6'>
@@ -69,9 +75,9 @@ const List = () => {
         </h3>
       </div>
       <div className='flex justify-between items-center '>
-        <input 
-        onChange={handleFilter}
-        type="text"
+        <input
+          onChange={handleFilter}
+          type="text"
           placeholder='Search By emp name'
           className='px-4 py-0.5 bg-white rounded-lg border' />
 
